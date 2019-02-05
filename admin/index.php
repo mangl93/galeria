@@ -28,7 +28,9 @@
 
       switch ($page) {
         case 'login':
+          
           include("includes/login.inc.php");
+          
           break;
         
           case 'new':

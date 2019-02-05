@@ -1,3 +1,15 @@
+<?php
+    include dirname( dirname( dirname(  __FILE__))) . "/htdocs/galeria/common/config.php";
+    include dirname( dirname( dirname(  __FILE__))) . "/htdocs/galeria/common/mysql.php";
+    include dirname( dirname( dirname(  __FILE__))) . "/htdocs/galeria/common/utils.php";
+
+    $connection = Connect( $config['database']);
+    $sql = "SELECT * FROM `images` where enabled = 1 order by id DESC";
+    $rows = ExecuteQuery( $sql,$connection);
+
+    Close( $connection);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,26 +43,54 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="admin/index.php?page=new">ADMIN</a>
+              <a class="nav-link" href="admin/index.php?page=login">ADMIN</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header"> Gallery</h1>
+        </div>
+        <?php 
+          foreach ($rows as $row ) 
+          {
+            echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+              <a class="" href="#">
+                <img class="img-responsive img-thumbnail css_img" src="images/'.$row['file']
+                  .'" alt="">
+                  </a>'.$row['name'].'
+                </div>';
 
+          }
+
+        ?>
+      
+      </div>
     <!-- Page Content -->
     
       
         
-        <div class="col-lg-3"></div>
 
-      </div>
+
+
+
+           <!-- Footer -->
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p></p>
+          </div>
+        </div>
+      </footer>
+
     <!-- /.container -->
     </div>
 
 
-    <!-- Footer -->
+ 
   
 
     <!-- Bootstrap core JavaScript -->
